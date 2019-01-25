@@ -132,4 +132,81 @@ namespace Chapter_6
             stereo.SetVolume(11);
         }
     }
+
+    public class CeilingFanCommand : ICommand
+    {
+        protected CellingFan cellingFan;
+        protected int prevSpeed;
+
+        public CeilingFanCommand(CellingFan cellingFan)
+        {
+            this.cellingFan = cellingFan;
+        }
+
+        public virtual void Execute()
+        {
+            prevSpeed = cellingFan.GetSpeed();
+            cellingFan.High();
+        }
+
+        public void Undo()
+        {
+            if(prevSpeed == (int)CellingFan.Speed.HIGH)
+            {
+                cellingFan.High();
+            }
+            else if(prevSpeed == (int)CellingFan.Speed.MEDIUM)
+            {
+                cellingFan.Medium();
+            }
+            else if(prevSpeed == (int)CellingFan.Speed.LOW)
+            {
+                cellingFan.Low();
+            }
+            else if(prevSpeed == (int)CellingFan.Speed.OFF)
+            {
+                cellingFan.Off();
+            }
+        }
+    }
+
+    public class CeilingFanHighCommand : CeilingFanCommand
+    {
+        public CeilingFanHighCommand(CellingFan cellingFan) : base(cellingFan) { }
+        public override void Execute()
+        {
+            prevSpeed = cellingFan.GetSpeed();
+            cellingFan.High();
+        }
+    }
+
+    public class CeilingFanLowCommand : CeilingFanCommand
+    {
+        public CeilingFanLowCommand(CellingFan cellingFan) : base(cellingFan) { }
+        public override void Execute()
+        {
+            prevSpeed = cellingFan.GetSpeed();
+            cellingFan.Low();
+        }
+    }
+
+    public class CeilingFanMediumCommand : CeilingFanCommand
+    {
+        public CeilingFanMediumCommand(CellingFan cellingFan) : base(cellingFan) { }
+        public override void Execute()
+        {
+            prevSpeed = cellingFan.GetSpeed();
+            cellingFan.Medium();
+        }
+    }
+
+    public class CeilingFanOffCommand : CeilingFanCommand
+    {
+        public CeilingFanOffCommand(CellingFan cellingFan) : base(cellingFan) { }
+        public override void Execute()
+        {
+            prevSpeed = cellingFan.GetSpeed();
+            cellingFan.Off();
+        }
+    }
 }

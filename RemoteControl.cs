@@ -60,6 +60,7 @@ namespace Chapter_6
                 stringBuff.Append("[slot " + i + "] " + onCommands[i].GetType().Name + "    " + offCommands[i].GetType().Name + "\r\n");
             }
 
+            stringBuff.Append("[undo] " + undoCommand.GetType().Name + "\r\n");
             return stringBuff.ToString();
         }
     }
