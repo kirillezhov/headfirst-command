@@ -12,60 +12,35 @@ namespace Chapter_6
         static void Main(string[] args)
         {
             RemoteControl remote = new RemoteControl();
-            //Light kitchenRoomlight = new Light("Kitchen");
-            //Light livingRoomLight = new Light("Living Room");
-            //GarageDoor garageDoor = new GarageDoor("");
-            //Stereo stereo = new Stereo("Living Room");
+            Light kitchenRoomlight = new Light("Kitchen");
+            Light livingRoomLight = new Light("Living Room");
+            GarageDoor garageDoor = new GarageDoor("");
+            Stereo stereo = new Stereo("Living Room");
 
-            //LightOnCommand livingRoomLightOn = new LightOnCommand(livingRoomLight);
-            //LightOffCommand livingRoomLightOff= new LightOffCommand(livingRoomLight);
-            //LightOnCommand kitchenRoomLightOn = new LightOnCommand(kitchenRoomlight);
-            //LightOffCommand kitchenRoomLightOff = new LightOffCommand(kitchenRoomlight);
+            LightOnCommand livingRoomLightOn = new LightOnCommand(livingRoomLight);
+            LightOffCommand livingRoomLightOff = new LightOffCommand(livingRoomLight);
+            LightOnCommand kitchenRoomLightOn = new LightOnCommand(kitchenRoomlight);
+            LightOffCommand kitchenRoomLightOff = new LightOffCommand(kitchenRoomlight);
 
-            //GarageDoorUpCommand garageDoorUp = new GarageDoorUpCommand(garageDoor);
-            //GarageDoorDownCommand garageDoorDown = new GarageDoorDownCommand(garageDoor);
+            GarageDoorUpCommand garageDoorUp = new GarageDoorUpCommand(garageDoor);
+            GarageDoorDownCommand garageDoorDown = new GarageDoorDownCommand(garageDoor);
 
-            //StereoOnWidthCDCommand stereoOnWidthCDCommand = new StereoOnWidthCDCommand(stereo);
-            //StereoOffWidthCDCommand stereoOffWidthCDCommand = new StereoOffWidthCDCommand(stereo);
+            StereoOnWidthCDCommand stereoOnWidthCDCommand = new StereoOnWidthCDCommand(stereo);
+            StereoOffWidthCDCommand stereoOffWidthCDCommand = new StereoOffWidthCDCommand(stereo);
 
-            CellingFan cellingFan = new CellingFan("Living Room");
+            ICommand[] partyOn = { livingRoomLightOn, garageDoorUp, stereoOnWidthCDCommand, kitchenRoomLightOn };
+            ICommand[] partyOff = { livingRoomLightOff, garageDoorDown, stereoOffWidthCDCommand, kitchenRoomLightOff };
 
-            CeilingFanCommand ceilingFanMedium = new CeilingFanMediumCommand(cellingFan);
-            CeilingFanCommand ceilingFanLow = new CeilingFanLowCommand(cellingFan);
-            CeilingFanCommand ceilingFanHigh = new CeilingFanHighCommand(cellingFan);
-            CeilingFanCommand ceilingFanOff = new CeilingFanOffCommand(cellingFan);
+            MacroCommand partyOnMacro = new MacroCommand(partyOn);
+            MacroCommand partyOffMacro = new MacroCommand(partyOff);
 
-            remote.SetCommand(0, ceilingFanMedium, ceilingFanOff);
-            remote.SetCommand(1, ceilingFanHigh, ceilingFanOff);
+            remote.SetCommand(0, partyOnMacro, partyOffMacro);
 
+            Console.WriteLine(remote);
+            Console.WriteLine("--- Pushing Macro On ---");
             remote.onButtonWasPressed(0);
+            Console.WriteLine("--- Pushing Macro Off ---");
             remote.offButtonWasPressed(0);
-
-            Console.WriteLine(remote);
-
-            remote.undoButtonWasPressed();
-            remote.onButtonWasPressed(1);
-
-            Console.WriteLine(remote);
-            remote.undoButtonWasPressed();
-
-            //remote.SetCommand(0, livingRoomLightOn, livingRoomLightOff);
-            //remote.SetCommand(1, kitchenRoomLightOn, kitchenRoomLightOff);
-            //remote.SetCommand(2, garageDoorUp, garageDoorDown);
-            //remote.SetCommand(3, stereoOnWidthCDCommand, stereoOffWidthCDCommand);
-
-            //Console.WriteLine(remote.ToString());
-
-            //remote.onButtonWasPressed(0);
-            //remote.undoButtonWasPressed();
-            //remote.offButtonWasPressed(0);
-            //remote.onButtonWasPressed(1);
-            //remote.offButtonWasPressed(1);
-            //remote.onButtonWasPressed(2);
-            //remote.offButtonWasPressed(2);
-            //remote.undoButtonWasPressed();
-            //remote.onButtonWasPressed(3);
-            //remote.offButtonWasPressed(3);
 
             Console.ReadKey();
         }
