@@ -45,9 +45,10 @@
     <Compile Include="ICommand.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SimpleRemoteControl.cs" />
+    <Compile Include="RemoteControl.cs" />
     <Compile Include="VendorClasses\GarageDoor.cs" />
     <Compile Include="VendorClasses\Light.cs" />
+    <Compile Include="VendorClasses\Stereo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

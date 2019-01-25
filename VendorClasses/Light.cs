@@ -9,14 +9,21 @@ namespace Chapter_6.VendorClasses
     //Receiver
     public class Light
     {
+        string Name;
+
+        public Light(string Name)
+        {
+            this.Name = Name;
+        }
+
         public void On()
         {
-            Console.WriteLine("Light is On");
+            Console.WriteLine(Name + " Light is On");
         }
 
         public void Off()
         {
-            Console.WriteLine("Light is Off");
+            Console.WriteLine(Name + " Light is Off");
         }
     }
 }
